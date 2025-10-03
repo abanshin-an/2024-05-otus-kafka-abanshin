@@ -1,4 +1,4 @@
-package ru.otus.kafka.hw3;
+package ru.otus.kafka.hw03;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -16,9 +16,9 @@ public class Consumer {
     private static Logger logger = LoggerFactory.getLogger(Consumer.class);
 
     public static void main(String[] args) throws Exception {
-
+        logger.info("Start producer...");
         Properties transactionConsumerProps = new Properties();
-        transactionConsumerProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        transactionConsumerProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:19092");
         transactionConsumerProps.put(ConsumerConfig.GROUP_ID_CONFIG, "consumer-group" + "-" + UUID.randomUUID());
         transactionConsumerProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         transactionConsumerProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);

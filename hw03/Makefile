@@ -34,5 +34,11 @@ up: ## Runs the containers with default config
 down: ## Stops and removes all containers
 	$(DOCKER_COMPOSE) $(PREFIX) down
 
-exec: ## Open console in docker container for executing kafka commands
-	docker exec -it kafka-broker bash
+#exec: ## Open console in docker container for executing kafka commands
+#	docker exec -it kafka-hw03 bash
+
+run: ## run homework application
+	java -cp build/libs/hw03-1.0-SNAPSHOT.jar ru.otus.kafka.hw03.Producer
+
+jar: *.java,*.kts,*.yaml ## build homework application
+	gradle build

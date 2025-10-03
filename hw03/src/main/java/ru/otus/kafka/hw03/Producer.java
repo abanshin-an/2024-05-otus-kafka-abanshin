@@ -1,4 +1,4 @@
-package ru.otus.kafka.hw3;
+package ru.otus.kafka.hw03;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -12,7 +12,7 @@ public class Producer {
 
         Properties transactionProducerProps = new Properties();
         transactionProducerProps.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, "hw3Producer");
-        transactionProducerProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        transactionProducerProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:19092");
         transactionProducerProps.put(ProducerConfig.ACKS_CONFIG, "all");
         transactionProducerProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         transactionProducerProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -21,16 +21,15 @@ public class Producer {
             producer.initTransactions();
             producer.beginTransaction();
             for (int i = 0; i < 5; ++i) {
-                producer.send(new ProducerRecord<>("topic1", "tx-some-" + i));
-                producer.send(new ProducerRecord<>("topic2", "tx-other-" + i));
+                producer.send(new ProducerRecord<>("topic1", "tx-one-commited-" + i));
+                producer.send(new ProducerRecord<>("topic2", "tx-two-commited-" + i));
             }
             producer.commitTransaction();
 
-
             producer.beginTransaction();
             for (int i = 0; i < 2; ++i) {
-                producer.send(new ProducerRecord<>("topic1", "rb-some-" + i));
-                producer.send(new ProducerRecord<>("topic2", "rb-other-" + i));
+                producer.send(new ProducerRecord<>("topic1", "rb-one-aborted-" + i));
+                producer.send(new ProducerRecord<>("topic2", "rb-two-aborted-" + i));
             }
             producer.abortTransaction();
         }
