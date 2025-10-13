@@ -30,6 +30,7 @@ cluster-id: ## regenerate CLUSTER_ID for kafka
 
 up: ## Runs the containers with default config
 	$(DOCKER_COMPOSE) $(PREFIX) up -d --build
+	. .env
 
 down: ## Stops and removes all containers
 	$(DOCKER_COMPOSE) $(PREFIX) down
