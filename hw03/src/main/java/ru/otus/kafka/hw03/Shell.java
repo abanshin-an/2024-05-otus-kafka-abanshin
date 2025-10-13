@@ -16,7 +16,7 @@ public class Shell {
                      Use
                      java -cp ./libs/hw03.jar ru.otus.kafka.hw03.Shell producer
                      or
-                     java -cp ./libs/hw03.jar ru.otus.kafka.hw03.Shell kafkaConsumer
+                     java -cp ./libs/hw03.jar ru.otus.kafka.hw03.Shell consumer
                      """);
         }
         switch (args[0]) {
