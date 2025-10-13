@@ -60,8 +60,8 @@ KAFKA_OPTS=--bootstrap-server $BOOTSTRAP_SERVER
 docker exec kafka-broker kafka-topics --bootstrap-server $BOOTSTRAP_SERVER --command-config $ADMIN_CONFIG --create --topic $TOPIC_NAME
 docker exec kafka-broker kafka-acls   --bootstrap-server $BOOTSTRAP_SERVER --command-config $ADMIN_CONFIG --add --allow-principal User:Alice --operation WRITE --topic $TOPIC_NAME
 docker exec kafka-broker kafka-acls   --bootstrap-server $BOOTSTRAP_SERVER --command-config $ADMIN_CONFIG --add --allow-principal User:Bob   --operation READ  --topic $TOPIC_NAME
-docker exec kafka-broker kafka-acls   --bootstrap-server $BOOTSTRAP_SERVER --command-config $ADMIN_CONFIG --add --allow-principal User:Bob   --operation READ  --operation DESCRIBE --group console-consumer
-docker exec kafka-broker kafka-acls   --bootstrap-server $BOOTSTRAP_SERVER --command-config $ADMIN_CONFIG --add --allow-principal User:Bob   --operation READ  --group console-consumer
+docker exec kafka-broker kafka-acls   --bootstrap-server $BOOTSTRAP_SERVER --command-config $ADMIN_CONFIG --add --allow-principal User:Bob   --operation READ  --operation DESCRIBE --group console-kafkaConsumer
+docker exec kafka-broker kafka-acls   --bootstrap-server $BOOTSTRAP_SERVER --command-config $ADMIN_CONFIG --add --allow-principal User:Bob   --operation READ  --group console-kafkaConsumer
 docker exec kafka-broker kafka-topics --bootstrap-server $BOOTSTRAP_SERVER --command-config $ADMIN_CONFIG --list
 docker exec kafka-broker kafka-acls   --bootstrap-server $BOOTSTRAP_SERVER --command-config $ADMIN_CONFIG --list
 ```
@@ -76,21 +76,21 @@ docker exec kafka-broker kafka-topics --list --bootstrap-server $BOOTSTRAP_SERVE
 echo Write topics -------------------------------------------------------------------------------------------
 docker exec -i kafka-broker kafka-console-producer --bootstrap-server $BOOTSTRAP_SERVER --producer.config $ALICE_CONFIG --topic $TOPIC_NAME
 echo Read topics -------------------------------------------------------------------------------------------
-docker exec -i kafka-broker kafka-console-consumer --bootstrap-server $BOOTSTRAP_SERVER --consumer.config $ALICE_CONFIG --topic $TOPIC_NAME --max-messages 1 --group console-consumer --from-beginning
+docker exec -i kafka-broker kafka-console-kafkaConsumer --bootstrap-server $BOOTSTRAP_SERVER --kafkaConsumer.config $ALICE_CONFIG --topic $TOPIC_NAME --max-messages 1 --group console-kafkaConsumer --from-beginning
 
 echo User Bob ============================================================================================
 docker exec kafka-broker kafka-topics --list --bootstrap-server $BOOTSTRAP_SERVER --command-config $BOB_CONFIG
 echo Write topics -------------------------------------------------------------------------------------------
 docker exec -i kafka-broker kafka-console-producer --bootstrap-server $BOOTSTRAP_SERVER --producer.config $BOB_CONFIG --topic $TOPIC_NAME
 echo Read topics -------------------------------------------------------------------------------------------
-docker exec -i kafka-broker kafka-console-consumer --bootstrap-server $BOOTSTRAP_SERVER --consumer.config $BOB_CONFIG --topic $TOPIC_NAME  --max-messages 1 --group console-consumer --from-beginning
+docker exec -i kafka-broker kafka-console-kafkaConsumer --bootstrap-server $BOOTSTRAP_SERVER --kafkaConsumer.config $BOB_CONFIG --topic $TOPIC_NAME  --max-messages 1 --group console-kafkaConsumer --from-beginning
 
 echo User Bill ============================================================================================
 docker exec kafka-broker kafka-topics --list --bootstrap-server $BOOTSTRAP_SERVER --command-config $BILL_CONFIG
 echo Write topics -------------------------------------------------------------------------------------------
 docker exec -i kafka-broker kafka-console-producer --bootstrap-server $BOOTSTRAP_SERVER --producer.config $BILL_CONFIG --topic $TOPIC_NAME
 echo Read topics -------------------------------------------------------------------------------------------
-docker exec -i kafka-broker kafka-console-consumer --bootstrap-server $BOOTSTRAP_SERVER --consumer.config $BILL_CONFIG --topic $TOPIC_NAME  --max-messages 1 --group console-consumer --from-beginning
+docker exec -i kafka-broker kafka-console-kafkaConsumer --bootstrap-server $BOOTSTRAP_SERVER --kafkaConsumer.config $BILL_CONFIG --topic $TOPIC_NAME  --max-messages 1 --group console-kafkaConsumer --from-beginning
 ```
 
 ### Результат
