@@ -2,7 +2,6 @@ package ru.otus.kafka.hw03;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.util.Properties;
 
 public class Shell {
     private static final Logger logger = LoggerFactory.getLogger(Shell.class);
@@ -26,10 +25,4 @@ public class Shell {
         }
     }
 
-    public static Properties configure(Properties properties, java.util.function.Consumer<Properties> propertiesAppender) {
-        Properties currentProperties = (Properties) properties.clone();
-        if (propertiesAppender != null)
-            propertiesAppender.accept(currentProperties);
-        return currentProperties;
-    }
 }

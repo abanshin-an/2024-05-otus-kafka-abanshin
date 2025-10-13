@@ -22,7 +22,7 @@ public class MyProducer {
     public static void produce() {
         logger.info("produce messages");
         try (KafkaProducer<String,String> producer = new KafkaProducer<>(
-                Shell.configure(KAFKA_PRODUCER_CONFIG,
+                configure(KAFKA_PRODUCER_CONFIG,
                 p -> p.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, "hw03")))) {
             producer.initTransactions();
             producer.beginTransaction();
@@ -45,5 +45,12 @@ public class MyProducer {
             logger.info("abort transaction");
             producer.abortTransaction();
         }
+    }
+
+    public static Properties configure(Properties properties, java.util.function.Consumer<Properties> propertiesAppender) {
+        Properties currentProperties = (Properties) properties.clone();
+        if (propertiesAppender != null)
+            propertiesAppender.accept(currentProperties);
+        return currentProperties;
     }
 }
