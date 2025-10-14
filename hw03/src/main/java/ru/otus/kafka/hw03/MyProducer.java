@@ -16,7 +16,6 @@ public class MyProducer {
         put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29092,localhost:39092,localhost:49092");
-//        put(ProducerConfig.ACKS_CONFIG, "all");
     }};
 
     public static void produce() {
