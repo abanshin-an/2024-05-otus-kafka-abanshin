@@ -13,9 +13,9 @@ public class Shell {
             logger.info("args.length = "+args.length);
             logger.info("""
                      Use
-                     java -cp ./libs/hw03.jar ru.otus.kafka.hw03.Shell producer
+                     java -cp ./build/libs/hw03-1.0.jar ru.otus.kafka.hw03.Shell producer
                      or
-                     java -cp ./libs/hw03.jar ru.otus.kafka.hw03.Shell consumer
+                     java -cp ./build/libs/hw03-1.0.jar ru.otus.kafka.hw03.Shell consumer
                      """);
         }
         switch (args[0]) {

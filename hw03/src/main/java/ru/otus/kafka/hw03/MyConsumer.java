@@ -19,7 +19,7 @@ public class MyConsumer {
         put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29092,localhost:39092,localhost:49092");
         put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-        this.config.put(ConsumerConfig.ISOLATION_LEVEL_CONFIG, "read_committed");
+        put(ConsumerConfig.ISOLATION_LEVEL_CONFIG, "read_committed");
         put(ConsumerConfig.GROUP_ID_CONFIG, "consumer");
     }};
 

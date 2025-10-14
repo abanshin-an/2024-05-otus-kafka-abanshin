@@ -31,8 +31,8 @@ make up
 ## Компиляция и запуск приложения
 ```shell
 gradle build
-java -cp ./libs/hw03-1.0.jar ru.otus.kafka.hw03.Shell producer
-java -cp ./libs/hw03-1.0.jar ru.otus.kafka.hw03.Shell consumer
+java -cp ./build/libs/hw03-1.0.jar ru.otus.kafka.hw03.Shell producer
+java -cp ./build/libs/hw03-1.0.jar ru.otus.kafka.hw03.Shell consumer
 ```
 ![image.png](image.png)
 
