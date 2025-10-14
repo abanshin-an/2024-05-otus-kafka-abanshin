@@ -26,8 +26,17 @@ docker exec hw04-kafka1-1 kafka-topics --create --topic events --bootstrap-serve
 ```
 ## Компиляция и запуск приложения
 ```shell
-gradle buildd
-java -cp ./libs/hw03-1.0.jar ru.otus.kafka.hw03.Shell producer
+gradle build
+java -cp ./libs/hw04-1.0.jar ru.otus.kafka.hw04.Application &
+
+./script/produce.sh
+sleep 5
+./script/produce.sh
+sleep 5
+./script/produce.sh
+sleep 301
+./script/produce.sh
+
 ```
 
 ## Остановить кафка
