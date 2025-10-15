@@ -22,24 +22,55 @@ make up
 
 * Создать топик events
 ```shell
-docker exec hw04-kafka1-1 kafka-topics --create --topic events --bootstrap-server localhost:9092
+docker exec hw04-kafka1-1 kafka-topics --create --topic events --bootstrap-server localhost:29092
 ```
 ## Компиляция и запуск приложения
 ```shell
-gradle build
-java -cp ./libs/hw04-1.0.jar ru.otus.kafka.hw04.Application &
-
-./script/produce.sh
-sleep 5
-./script/produce.sh
-sleep 5
-./script/produce.sh
-sleep 301
-./script/produce.sh
-
+make run
+#gradle clean build
+#java -cp ./build/libs/hw04-1.0.jar ru.otus.kafka.hw04.Application
 ```
 
-## Остановить кафка
+## Отправка сообщений
 ```shell
+./scripts/produce.sh << !
+asd:adaasd
+!
+sleep 5
+./scripts/produce.sh << !
+asd:wewqew
+!
+sleep 5
+./scripts/produce.sh << !
+asd:zxcc
+!
+sleep 5
+./scripts/produce.sh << !
+qqq:adaasd
+!
+sleep 5
+./scripts/produce.sh << !
+qqq:wewqew
+!
+sleep 5
+./scripts/produce.sh << !
+qqq:zxcc
+!
+sleep 301
+./scripts/produce.sh << !
+asd:fsdfsd
+!
+sleep 5
+./scripts/produce.sh << !
+qqq:zxccwqe
+!
+
+```
+**Видим, что по 3 сообщения для каждого ключа обработаны в одно окно, а еще по одному сообшению
+обработаны в следующее окно через 5 минут**
+
+![image.png](image.png)
+
+## Остановить Kafka
 make down 
 ```

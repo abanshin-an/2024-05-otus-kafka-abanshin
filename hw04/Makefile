@@ -32,3 +32,8 @@ up: ## Runs the containers with default config
 down: ## Stops and removes all containers
 	$(DOCKER_COMPOSE) $(PREFIX) down
 
+build: ## Build the project using Gradle
+	../gradlew build
+
+run: ## Build the project using Gradle
+	../gradlew run
