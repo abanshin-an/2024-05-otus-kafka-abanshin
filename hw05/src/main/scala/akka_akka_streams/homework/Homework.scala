@@ -2,10 +2,14 @@ package akka_akka_streams.homework
 
 import akka.NotUsed
 import akka.actor.ActorSystem
+import akka.kafka.{ConsumerSettings, Subscriptions}
+import akka.kafka.scaladsl.Consumer
 import akka.stream.{ActorMaterializer, ClosedShape, Graph}
 import akka.stream.scaladsl.{Broadcast, Flow, GraphDSL, RunnableGraph, Sink, Source, ZipN}
-
-import ch.qos.logback.classic.{Level, Logger}
+import ch.qos.logback.classic.{ Logger}
+import com.typesafe.config.ConfigFactory
+import org.apache.kafka.clients.consumer.ConsumerRecord
+import org.apache.kafka.common.serialization.{IntegerDeserializer, StringDeserializer}
 import org.slf4j.LoggerFactory
 
 object Homework {
@@ -16,6 +20,10 @@ object Homework {
   implicit val system: ActorSystem = ActorSystem("fusion")
   implicit val materializer: ActorMaterializer = ActorMaterializer()
 
+  private val config = ConfigFactory.load()
+  private val consumerConfig = config.getConfig("akka.kafka.consumer")
+
+  val consumerSettings : ConsumerSettings[String, Integer] = ConsumerSettings(consumerConfig, new StringDeserializer, new IntegerDeserializer)
   private val logger: Logger = LoggerFactory
     .getLogger("homework")
     .asInstanceOf[Logger]
@@ -23,7 +31,6 @@ object Homework {
   private val graph: Graph[ClosedShape.type, NotUsed] =
     GraphDSL.create() { implicit builder: GraphDSL.Builder[NotUsed] =>
       import GraphDSL.Implicits._
-
       val input = builder.add(Source(1 to 5))
       val x10 = builder.add(Flow[Int].map(x => x * 10))
       val x2 = builder.add(Flow[Int].map(x => x * 2))

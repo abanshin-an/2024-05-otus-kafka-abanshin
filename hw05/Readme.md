@@ -53,7 +53,7 @@ zip --> sum
 3) Реализовать логику работы с потоками
 4) Запустить программу командой 
 ```sbt
-sbt run
+sbt <<< "~runMain homework.Homework"
 ```
 Получаем лог
 ```log
@@ -71,4 +71,26 @@ andrewabanshin@MacStudio-Andrew hw05 % sbt run
 21:28:40.027 [fusion-akka.actor.default-dispatcher-5] INFO homework - 60
 21:28:40.028 [fusion-akka.actor.default-dispatcher-5] INFO homework - 75
 [success] Total time: 1 s, completed 19 окт. 2025 г., 21:28:40
+```
+
+5) Запустить программу командой
+```sbt
+sbt <<< "~runMain alpakka.ProducerApp"
+sbt <<< "~runMain alpakka.ConsumerApp"  
+```
+
+```log
+....
+>....[info] running alpakka.ConsumerApp 
+01:51:31.243 [fusion-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+01:51:31.370 [consumer-sys-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+Start ConsumerApp
+[success] Total time: 1 s, completed Nov 24, 2025, 1:51:31 AM
+[info] 1. Monitoring source files for root/runMain alpakka.ConsumerApp...
+[info]    Press <enter> to interrupt or '?' for more options.
+15
+30
+45
+60
+75
 ```
